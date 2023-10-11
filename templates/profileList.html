@@ -2,14 +2,15 @@
 {% load static %}
 
 {% block content %}
-    <section class='bg-primary_black min-h-screen py-20 md:py-0 flex-col flex justify-center items-center' style="background-image: url('{% static 'assets/background_netflix.jpg' %}');">
+    <section class='bg-primary_black min-h-screen py-20 md:py-0 flex-col flex justify-center items-center' style="background-image: url('static/assets/background_netflix.jpg');">
         <h2 class="text-center font-medium text-5xl my-4 text-gray-100">
             Who's watching ?
         </h2>
 
         <div class="flex flex-wrap justify-center items-center w-10/12  md:w-6/12">
           {% for profile in profiles %}
-            <a href="">
+                                 <!-- ارسال ايدي البروفايل الي المتغير للايدي -->
+            <a href="{% url 'movie-list' profile_id=profile.uuid %}">
               <div class="w-32 h-32 m-4  bg-blue-500 rounded-md cursor-pointer justify-center items-center flex-col flex">
                 <!--                                      لجلب اول حرف من الاسم فقط وجعله بالخط الكبير -->
                 <p class="text-6xl" style="font-weight: 980;">{{profile.name|slice:":1"|capfirst}}</p>
@@ -19,9 +20,9 @@
           {% endfor %}
         </div>
         <div class="flex justify-center items-center">
-            <button class="px-4 py-2 rounded-md outline-none bg-gray-400 text-gray-100">
-                Add A New Profile
-            </button>
+            <a href="{% url 'profile-create' %}" class="px-4 py-2 rounded-md outline-none bg-gray-400 text-gray-100" style="background: red;">
+                <strong>Add A New Profile</strong>
+            </a>
         </div>
     </section>
 {% endblock %}
